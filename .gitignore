@@ -1,0 +1,25 @@
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# Compiled PDF output
+notes/main.pdf
+
+# macOS
+.DS_Store
+
+# Claude config
+.claude/
+
+# Lecture sections not yet covered (everything except lecture 01)
+notes/sections/lecture_0[2-9]*.tex
+notes/sections/lecture_1[0-5]*.tex
+
+# Lecture PDFs not yet covered
+lectures/clustering.pdf
+lectures/cmb.pdf

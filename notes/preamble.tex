@@ -1,0 +1,79 @@
+% Preamble for Advanced Topics in Cosmology Lecture Notes
+% -------------------------------------------------------
+
+% Mathematics
+\usepackage{amsmath, amssymb, mathtools}
+\usepackage{bm}
+
+% Figures and graphics
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{float}
+\usepackage{subcaption}
+
+% Layout
+\usepackage[margin=2.5cm, headheight=14.5pt]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\leftmark}
+\fancyhead[LO]{\rightmark}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Typography
+\usepackage{microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% References and links
+\usepackage[colorlinks=true, linkcolor=blue!60!black, citecolor=green!50!black, urlcolor=blue!70!black]{hyperref}
+\usepackage{cleveref}
+
+% Tables
+\usepackage{booktabs}
+
+% Colours (for occasional emphasis)
+\usepackage{xcolor}
+
+% Useful cosmology macros
+\newcommand{\dd}{\mathrm{d}}                      % upright differential
+\newcommand{\ee}{\mathrm{e}}                      % upright Euler's number
+\newcommand{\ii}{\mathrm{i}}                      % imaginary unit
+\newcommand{\Omm}{\Omega_{\mathrm{m}}}            % Omega_matter
+\newcommand{\Omb}{\Omega_{\mathrm{b}}}            % Omega_baryon
+\newcommand{\Omc}{\Omega_{\mathrm{c}}}            % Omega_CDM
+\newcommand{\OmDE}{\Omega_{\mathrm{DE}}}          % Omega_DE
+\newcommand{\Omr}{\Omega_{\mathrm{r}}}            % Omega_radiation
+\newcommand{\Omk}{\Omega_{k}}                     % Omega_curvature
+\newcommand{\Omtot}{\Omega_{\mathrm{tot}}}        % Omega_total
+\newcommand{\Lcdm}{\Lambda\mathrm{CDM}}           % LambdaCDM
+\newcommand{\vgamma}{v_{\gamma}}                   % photon velocity
+\newcommand{\vb}{v_{\mathrm{b}}}                   % baryon velocity
+\newcommand{\vgb}{v_{\gamma\mathrm{b}}}            % photon-baryon velocity
+\newcommand{\cs}{c_{\mathrm{s}}}                   % sound speed
+\newcommand{\kD}{k_{\mathrm{D}}}                   % diffusion wavenumber
+\newcommand{\lA}{\ell_{\mathrm{A}}}                % acoustic multipole
+\newcommand{\kA}{k_{\mathrm{A}}}                   % acoustic wavenumber
+\newcommand{\sstar}{s_{*}}                          % sound horizon at recombination
+\newcommand{\etastar}{\eta_{*}}                     % conformal time at recombination
+\newcommand{\xe}{x_{\mathrm{e}}}                   % free electron fraction
+\newcommand{\NH}{N_{\mathrm{H}}}                   % hydrogen number density
+\newcommand{\Ne}{N_{\mathrm{e}}}                   % electron number density
+\newcommand{\sigmaT}{\sigma_{\mathrm{T}}}          % Thomson cross-section
+\newcommand{\EI}{E_{\mathrm{I}}}                   % ionisation energy
+\newcommand{\Tgamma}{T_{\gamma}}                    % photon temperature
+
+% Introduction / general macros
+\newcommand{\Hnot}{H_0}                              % Hubble constant
+\newcommand{\kmsMpc}{\,\mathrm{km\,s^{-1}\,Mpc^{-1}}}% km/s/Mpc unit
+\newcommand{\Msun}{M_{\odot}}                         % solar mass
+\newcommand{\Rsun}{R_{\odot}}                         % solar radius
+\newcommand{\sigmaEight}{\sigma_8}                     % sigma_8
+
+% Galaxy clustering macros
+\newcommand{\xicf}{\xi}                             % correlation function
+\newcommand{\Pk}{P(k)}                              % power spectrum
+\newcommand{\bg}{b_{\mathrm{g}}}                    % galaxy bias
+\newcommand{\fgr}{f}                                % growth rate
+\newcommand{\sigv}{\sigma_{v}}                      % velocity dispersion
