@@ -6,6 +6,8 @@
 *.synctex.gz
 *.fls
 *.fdb_latexmk
+*.nav
+*.snm
 
 # Compiled PDF output
 notes/main.pdf
@@ -16,8 +18,14 @@ notes/main.pdf
 # Claude config
 .claude/
 
-# Lecture sections not yet covered (everything except lecture 01)
-notes/sections/lecture_0[2-9]*.tex
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Video files (too large for git)
+video/
+
+# Lecture sections not yet covered (everything except lectures 01 and 02)
+notes/sections/lecture_0[3-9]*.tex
 notes/sections/lecture_1[0-5]*.tex
 
 # Lecture PDFs not yet covered

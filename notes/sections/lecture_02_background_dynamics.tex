@@ -1,0 +1,1086 @@
+\chapter{Expanding Universe and Background Dynamics}
+\label{ch:background_dynamics}
+
+In this chapter we will look at the expansion and background dynamics of the Universe on large scales. Firstly, we will employ the use of General Relativity, which will require us to consider several crucial concepts such as the metric and the energy-momentum tensor in our journey towards a description of the expansion dynamics. However, later in this chapter, we will show that the same equations can, in fact, be obtained from a much simpler Newtonian derivation. With the so-called Friedmann Equations in hand we proceed to solve them in various scenarios, and we will see what this means for the expansion of the Universe and its ultimate fate. 
+
+
+\section*{Interlude: A Brief Review of Tensor Algebra}
+
+This is not a course in General Relativity. We do not have the time to explain the theory in detail. However, if you have studied GR before it may still be useful for a refresher on index notation and tensor operations that we will use throughout.
+
+\subsection*{Index notation and the Einstein summation convention}
+
+In general relativity, quantities carry \emph{indices} that label their components. Greek indices ($\mu, \nu, \lambda, \ldots$) run over all four spacetime dimensions: $0,1,2,3$ (time and three spatial directions). Latin indices ($i, j, k, \ldots$) run over only the three spatial dimensions: $1,2,3$.
+
+The \textbf{Einstein summation convention} states that whenever an index appears once as a superscript (upper) and once as a subscript (lower) in the same term, a sum over all values of that index is implied:
+\begin{equation}
+    A^\mu B_\mu \equiv \sum_{\mu=0}^{3} A^\mu B_\mu = A^0 B_0 + A^1 B_1 + A^2 B_2 + A^3 B_3\,.
+\end{equation}
+Such a repeated index is called a \emph{dummy} or \emph{contracted} index. An index that appears only once (and is not summed over) is called a \emph{free} index.
+
+\subsection*{The metric tensor and raising/lowering indices}
+
+The metric tensor $g_{\mu\nu}$ is the central object that defines the geometry of spacetime. It determines the invariant interval (``distance'') between nearby events:
+\begin{equation}
+    ds^2 = g_{\mu\nu}\,dx^\mu\,dx^\nu\,.
+\end{equation}
+The metric is symmetric: $g_{\mu\nu}=g_{\nu\mu}$.
+
+Its inverse, denoted $g^{\mu\nu}$, is defined by the condition
+\begin{equation}
+    g^{\mu\alpha}\,g_{\alpha\nu} = \delta^\mu_{\ \nu}\,,
+\end{equation}
+where $\delta^\mu_{\ \nu}$ is the \textbf{Kronecker delta}: $\delta^\mu_{\ \nu}=1$ if $\mu=\nu$ and $0$ otherwise. The trace of the Kronecker delta gives the dimension of the space: $\delta^\mu_{\ \mu}=4$ in four-dimensional spacetime, or $\delta^i_{\ i}=3$ for the spatial part.
+
+The metric and its inverse allow us to \textbf{raise and lower indices}, converting between contravariant (upper) and covariant (lower) components of a tensor:
+\begin{align}
+    \text{Lowering:} &\qquad V_\mu = g_{\mu\nu}\,V^\nu\,,\\[4pt]
+    \text{Raising:}  &\qquad V^\mu = g^{\mu\nu}\,V_\nu\,.
+\end{align}
+For a tensor with multiple indices, each index is raised or lowered independently. For example:
+\begin{equation}
+    T^{\mu}_{\ \nu} = g^{\mu\alpha}\,T_{\alpha\nu}\,,\qquad T^{\mu\nu} = g^{\mu\alpha}\,g^{\nu\beta}\,T_{\alpha\beta}\,.
+\end{equation}
+Physically, $V^\mu$ and $V_\mu$ represent the same geometric object (a vector) expressed in two different ways. The metric converts between them, accounting for the curvature of the space.
+
+\subsection*{Contraction}
+
+\textbf{Contraction} means setting an upper and a lower index equal and summing (i.e.\ taking a trace). For example, from a rank-2 tensor $T^{\mu}_{\ \nu}$, the contraction $T^\mu_{\ \mu}$ produces a scalar (a single number at each point). A familiar example is the Ricci scalar, obtained by contracting the Ricci tensor:
+\begin{equation}
+    R = g^{\mu\nu}\,R_{\mu\nu}\,.
+\end{equation}
+Here the metric first raises one index of $R_{\mu\nu}$ and then the contraction is taken, but the two operations are combined in one step.
+
+\medskip
+These conventions are all we need to follow the GR derivation of the Friedmann equations that follows.
+
+
+\section{Friedmann via General Relativity }
+
+\subsection{The Metric, $g_{\mu \nu}$}
+A metric is the object that tells you how to compute distances (and time intervals) in a given spacetime. More precisely, it defines the infinitesimal interval $ds^{2}$ between two neighbouring events as a function of the coordinate differentials. Once you have the metric, you have the geometry---you can compute distances, angles, volumes, geodesics (the paths of freely falling particles and light rays), and ultimately the curvature of spacetime itself.
+
+Students will already be familiar with one metric: the Minkowski metric of special relativity,
+\begin{equation}
+    ds^{2} = -c^{2}\,dt^{2} + dx^{2} + dy^{2} + dz^{2},
+    \label{eq:minkowski}
+\end{equation}
+which describes a flat, static spacetime with no gravity. The minus sign in front of the time component is what distinguishes spacetime geometry from ordinary Euclidean geometry---it encodes the fact that time and space are not equivalent, and it gives rise to the causal structure of light cones. Intervals with $ds^{2}<0$ are timelike (traversable by massive particles), $ds^{2}=0$ are null (traversed by light), and $ds^{2}>0$ are spacelike (no causal connection).
+
+The key point is that the Minkowski metric has constant coefficients---nothing depends on position or time. This reflects the fact that special relativity describes a spacetime with no gravity and no expansion. General relativity generalises this by allowing the coefficients in front of the coordinate differentials to become functions of the coordinates. In the most general case one writes
+\begin{equation}
+    ds^{2} = g_{\mu\nu}\,dx^{\mu}\,dx^{\nu},
+    \label{eq:general_metric}
+\end{equation}
+where $g_{\mu\nu}$ is a symmetric $4\times 4$ matrix (the metric tensor) that can vary from point to point. For Minkowski spacetime, $g_{\mu\nu} = \eta_{\mu\nu} = \mathrm{diag}(-c^{2},\,1,\,1,\,1)$ everywhere. For the Schwarzschild solution around a spherical mass, the coefficients depend on the radial coordinate~$r$. For cosmology, the FLRW metric has coefficients that depend on time through the scale factor $a(t)$---this single function encodes the entire expansion history of the universe.
+
+So when we write down the FLRW metric, we are specifying the geometry of a universe that is spatially homogeneous and isotropic but whose spatial distances are stretching (or contracting) with time. Everything else---the Friedmann equations, the Hubble law, the redshift, the horizon structure---follows from this one object.
+
+
+\subsection{Friedmann--Lema\^{i}tre--Robertson--Walker (FLRW) metric }
+The Friedmann--Lema\^{i}tre--Robertson--Walker (FLRW) metric is the exact solution to Einstein's field equations that describes a homogeneous, isotropic, expanding (or contracting) universe. It is the mathematical backbone of modern physical cosmology.
+
+The FLRW metric is, in essence, the \emph{unique} metric (up to a choice of spatial curvature) that follows from imposing the \textbf{cosmological principle}: the assumption that the universe is spatially homogeneous and isotropic on sufficiently large scales. Homogeneity means no preferred location; isotropy means no preferred direction. Together these drastically constrain the geometry---the spatial part of the metric must be a maximally symmetric 3-space, leaving only three possibilities for spatial curvature (positive, zero, or negative), plus a single free function of time, the scale factor $a(t)$.
+
+The logical chain is therefore:
+\begin{equation*}
+    \text{Einstein's Field Equations} + \text{Cosmological Principle} \;\Longrightarrow\; \text{FLRW Metric.}
+\end{equation*}
+
+Observational support comes from the large-scale galaxy distribution, the near-perfect isotropy of the CMB (with $\delta T/T \sim 10^{-5}$), and the isotropic Hubble flow. The principle is, of course, an approximation---it holds statistically on scales $\gtrsim 100\,h^{-1}\,\mathrm{Mpc}$, while structure on smaller scales (clusters, filaments, voids) is treated as perturbations on top of the FLRW background.
+
+\subsection{Historical Development}
+
+The metric carries four names because it was assembled in stages over roughly two decades.
+
+\subsection*{Alexander Friedmann (1922, 1924)}
+
+Friedmann derived the first dynamical cosmological solutions to Einstein's equations, showing that the universe need not be static. His 1922 paper treated the positive-curvature case and his 1924 paper the negative-curvature case. Einstein initially thought there was a mathematical error, later retracted the objection, but never took the physical implications seriously during Friedmann's lifetime. Friedmann died in 1925.
+
+\subsection*{Georges Lema\^{i}tre (1927)}
+
+Lema\^{i}tre independently derived an expanding solution, and---crucially---connected it to observational data, proposing a linear relation between recession velocity and distance (what we now call the Hubble law, two years before Hubble's 1929 paper). His paper, published in French in an obscure Belgian journal, went essentially unnoticed until Eddington drew attention to it in 1931.
+
+There is a notable historical injustice in the naming. Lema\^{i}tre's contribution was under-recognized for decades, partly due to a mistranslation of his 1927 paper into English in 1931 where the key paragraphs establishing the velocity--distance relation were omitted. Only in 2011 did Mario Livio show this was likely Lema\^{i}tre's own editorial decision, though the broader neglect of his priority remains a sore point in the history of cosmology.
+
+\subsection*{Howard Percy Robertson (1935, 1936) and Arthur Geoffrey Walker (1937)}
+
+Robertson and Walker independently gave a rigorous differential-geometric proof that homogeneity and isotropy \emph{uniquely} determine the metric form (up to the curvature parameter and scale factor). Their contribution was less about finding solutions to Einstein's equations and more about proving a geometric theorem: the most general metric consistent with the cosmological principle must take the form we now write down. This is why the metric is sometimes called simply the ``Robertson--Walker'' metric when one wishes to emphasize the kinematic/geometric content without reference to the dynamics.
+
+\subsection{The Line Element}
+
+In comoving coordinates $(t,\, r,\, \theta,\, \phi)$ with signature $(-,+,+,+)$, the FLRW metric is:
+\begin{equation}
+    \boxed{\;
+    ds^{2} = -c^{2}\,dt^{2}
+    + a^{2}(t)\!\left[\frac{dr^{2}}{1-kr^{2}}
+    + r^{2}\!\left(d\theta^{2} + \sin^{2}\!\theta\;d\phi^{2}\right)\right]
+    \;}
+    \label{eq:flrw}
+\end{equation}
+where:
+\begin{itemize}
+    \item $t$ is \textbf{cosmic time}, the proper time measured by comoving observers (those at rest with respect to the Hubble flow).
+    \item $a(t)$ is the \textbf{scale factor}, encoding the expansion history. It is conventionally normalised to $a(t_{0})=1$ today.
+    \item $k$ is the \textbf{curvature parameter}: $k=+1$ (closed, spherical), $k=0$ (flat, Euclidean), or $k=-1$ (open, hyperbolic). Some conventions absorb a length scale into $k$ so that it can take any real value, but the sign is what matters physically.
+    \item $r$ is a dimensionless \textbf{comoving radial coordinate}; physical distance is $a(t)\cdot r$.
+\end{itemize}
+
+Reading off the metric components from Eq.~\eqref{eq:flrw}, the non-zero components are
+\begin{equation}
+    g_{00} = -c^2,\qquad g_{rr} = \frac{a^2}{1-kr^2},\qquad g_{\theta\theta} = a^2 r^2,\qquad g_{\phi\phi} = a^2 r^2\sin^2\!\theta,
+\end{equation}
+with inverses obtained from $g^{\mu\alpha}g_{\alpha\nu}=\delta^\mu_{\ \nu}$:
+\begin{equation}
+    g^{00} = -\frac{1}{c^2},\qquad g^{rr} = \frac{1-kr^2}{a^2},\qquad g^{\theta\theta} = \frac{1}{a^2 r^2},\qquad g^{\phi\phi} = \frac{1}{a^2 r^2\sin^2\!\theta}\,.
+\end{equation}
+
+\medskip
+\noindent\textbf{Convention:} From here on, we adopt \textbf{natural units} $c=1$ for the GR derivation. In these units $g_{00}=-1$ and the metric~\eqref{eq:flrw} becomes $ds^2=-dt^2+a^2(t)[\cdots]$. This keeps the algebra clean and is standard in GR treatments. We will restore explicit factors of $c$ where needed (e.g.\ in the energy--momentum tensor and the continuity equation).
+
+\subsection{Christoffel Symbols}
+
+The Christoffel symbols (or Levi-Civita connection coefficients) encode how the coordinate basis vectors change from point to point in curved spacetime. They are defined entirely in terms of the metric and its first derivatives:
+\begin{equation}
+    \Gamma^\mu_{\alpha\beta} = \frac{1}{2}\,g^{\mu\nu}\bigl(\partial_\alpha g_{\nu\beta} + \partial_\beta g_{\nu\alpha} - \partial_\nu g_{\alpha\beta}\bigr).
+\end{equation}
+Since the metric is diagonal, the computation simplifies considerably. In our $c=1$ units, $g_{00}=-1$ is constant, $g_{0i}=0$, and the spatial components $g_{ij}$ depend on both time (through $a(t)$) and the spatial coordinates (through the curvature terms). We organize the non-vanishing components into three groups.
+
+\subsection*{Mixed temporal--spatial: $\Gamma^0_{ij}$}
+
+These components arise because the spatial metric changes with time (the Universe expands or contracts). Setting $\mu=0$, only the $\nu=0$ term in the sum survives (since $g^{0\nu}$ is non-zero only for $\nu=0$, as the metric is diagonal). The only non-zero contribution comes from $-\partial_0 g_{ij}$:
+\begin{align}
+    \Gamma^0_{rr} &= \frac{a\dot{a}}{1-kr^2}\,,\\[4pt]
+    \Gamma^0_{\theta\theta} &= a\dot{a}\,r^2\,,\\[4pt]
+    \Gamma^0_{\phi\phi} &= a\dot{a}\,r^2\sin^2\!\theta\,.
+\end{align}
+Comparing with the metric components, these can be written compactly as
+\begin{equation}\label{eq:gamma0ij}
+    \Gamma^0_{ij} = \frac{\dot{a}}{a}\,g_{ij} = H\,g_{ij}\,,
+\end{equation}
+where $H\equiv\dot{a}/a$ is the Hubble parameter. This compact form will greatly simplify the calculation of the Ricci tensor.
+
+\subsection*{Mixed temporal--spatial: $\Gamma^i_{0j}$}
+
+These components describe how the spatial basis vectors are ``stretched'' by the expansion. The calculation is the same as in the flat case because the $g^{ik}$ and $\partial_0 g_{kj}$ factors always combine to give a Kronecker delta:
+\begin{equation}\label{eq:gammai0j}
+    \Gamma^i_{0j} = \frac{1}{2}\,g^{ik}\,\partial_0 g_{kj} = \frac{1}{2}\,g^{ik}\cdot 2\dot{a}a\,\gamma_{kj} = \frac{\dot{a}}{a}\,\delta^i_{\ j} = H\,\delta^i_{\ j}\,,
+\end{equation}
+where $\gamma_{kj}$ is the time-independent part of the spatial metric ($g_{kj}=a^2\gamma_{kj}$). Explicitly: $\Gamma^r_{0r}=\Gamma^\theta_{0\theta}=\Gamma^\phi_{0\phi}=H$. Note that this result is independent of the spatial curvature $k$.
+
+\subsection*{Purely spatial: $\Gamma^i_{jk}$}
+
+Unlike the flat case in Cartesian coordinates, the spatial metric now has coordinate dependence through both the curvature term $1/(1-kr^2)$ and the standard spherical coordinate factors. These Christoffel symbols are those of the three-dimensional spatial geometry:
+
+\medskip
+\noindent\textbf{$r$-components:}
+\begin{align}
+    \Gamma^r_{rr} &= \frac{kr}{1-kr^2}\,,\\[4pt]
+    \Gamma^r_{\theta\theta} &= -r(1-kr^2)\,,\\[4pt]
+    \Gamma^r_{\phi\phi} &= -r(1-kr^2)\sin^2\!\theta\,.
+\end{align}
+
+\noindent\textbf{$\theta$-components:}
+\begin{align}
+    \Gamma^\theta_{r\theta} = \Gamma^\theta_{\theta r} &= \frac{1}{r}\,,\\[4pt]
+    \Gamma^\theta_{\phi\phi} &= -\sin\theta\cos\theta\,.
+\end{align}
+
+\noindent\textbf{$\phi$-components:}
+\begin{align}
+    \Gamma^\phi_{r\phi} = \Gamma^\phi_{\phi r} &= \frac{1}{r}\,,\\[4pt]
+    \Gamma^\phi_{\theta\phi} = \Gamma^\phi_{\phi\theta} &= \cot\theta\,.
+\end{align}
+
+Note that the $1/r$ and $\cot\theta$ terms are simply the standard spherical coordinate contributions and are present even when $k=0$. The genuinely curvature-dependent terms are those containing $k$ explicitly: $\Gamma^r_{rr}$ and the $(1-kr^2)$ factors in $\Gamma^r_{\theta\theta}$ and $\Gamma^r_{\phi\phi}$.
+
+All other Christoffel symbols vanish ($\Gamma^0_{00}=\Gamma^0_{0i}=\Gamma^i_{00}=0$).
+
+\subsection{The Ricci Tensor}
+
+The Ricci tensor is constructed from the Christoffel symbols and their derivatives. Physically, it encodes how volumes of small balls of test particles are distorted by the curvature of spacetime. It is defined as a contraction of the Riemann curvature tensor $R^\lambda_{\ \mu\lambda\nu}$, which gives:
+\begin{equation}\label{eq:ricci}
+    R_{\mu\nu} = \partial_\lambda\Gamma^\lambda_{\mu\nu} - \partial_\nu\Gamma^\lambda_{\mu\lambda} + \Gamma^\lambda_{\lambda\sigma}\Gamma^\sigma_{\mu\nu} - \Gamma^\lambda_{\nu\sigma}\Gamma^\sigma_{\mu\lambda}\,.
+\end{equation}
+The first two terms involve derivatives of the Christoffel symbols, while the last two are quadratic in the Christoffel symbols. This structure means the Ricci tensor contains second derivatives of the metric, as expected for a quantity that describes curvature.
+
+\subsection*{Strategy: Exploiting Symmetry}
+
+By the isotropy and homogeneity of the FLRW metric, the Ricci tensor must take the form
+\begin{equation}
+    R_{0i} = 0\,,\qquad R_{ij} = f(t)\,g_{ij}\,,
+\end{equation}
+for some function $f(t)$. The vanishing of $R_{0i}$ follows from spatial isotropy: there is no preferred spatial direction. The proportionality of $R_{ij}$ to $g_{ij}$ follows from the fact that $g_{ij}$ is the only available symmetric spatial tensor. This means we only need to compute $R_{00}$ and determine the single function $f(t)$ to know the full Ricci tensor.
+
+\subsection*{Computing $R_{00}$}
+
+We evaluate each of the four terms in Eq.~\eqref{eq:ricci} with $\mu=\nu=0$, carefully tracking which Christoffel symbols contribute.
+
+\medskip\noindent\textbf{Term 1:} $\partial_\lambda\Gamma^\lambda_{00}$.
+
+This term requires Christoffel symbols with both lower indices equal to 0. Since $g_{00}=-1$ is constant and $g_{0i}=0$, we have $\Gamma^\lambda_{00}=0$ for all $\lambda$:
+\begin{equation}
+    \partial_\lambda\Gamma^\lambda_{00} = 0\,.
+\end{equation}
+
+\medskip\noindent\textbf{Term 2:} $-\partial_0\Gamma^\lambda_{0\lambda}$.
+
+This is a trace over $\lambda$. For $\lambda=0$: $\Gamma^0_{00}=0$. For $\lambda=i$: $\Gamma^i_{0i}=H$. Since the spatial index runs over three dimensions:
+\begin{equation}
+    \Gamma^\lambda_{0\lambda} = 3H = 3\,\frac{\dot{a}}{a}\,.
+\end{equation}
+Taking the time derivative using the quotient rule $\partial_0(\dot{a}/a)=\ddot{a}/a-\dot{a}^2/a^2$:
+\begin{equation}
+    -\partial_0\!\left(3\,\frac{\dot{a}}{a}\right) = -3\left(\frac{\ddot{a}}{a} - \frac{\dot{a}^2}{a^2}\right) = -3\,\frac{\ddot{a}}{a} + 3H^2\,.
+\end{equation}
+
+\medskip\noindent\textbf{Term 3:} $\Gamma^\lambda_{\lambda\sigma}\Gamma^\sigma_{00}$.
+
+This term vanishes because $\Gamma^\sigma_{00}=0$ for all $\sigma$, as argued above:
+\begin{equation}
+    \Gamma^\lambda_{\lambda\sigma}\Gamma^\sigma_{00} = 0\,.
+\end{equation}
+
+\medskip\noindent\textbf{Term 4:} $-\Gamma^\lambda_{0\sigma}\Gamma^\sigma_{0\lambda}$.
+
+The non-zero $\Gamma$ symbols with a 0 in the lower slot are $\Gamma^i_{0j}=H\,\delta^i_{\ j}$. Therefore both $\lambda$ and $\sigma$ must be spatial:
+\begin{equation}
+    -\Gamma^i_{0j}\,\Gamma^j_{0i} = -H^2\,\delta^i_{\ j}\,\delta^j_{\ i} = -H^2\,\delta^i_{\ i}\,.
+\end{equation}
+The contraction $\delta^i_{\ j}\,\delta^j_{\ i}$ first collapses via the summed index $j$ into $\delta^i_{\ i}$, which is the trace of the $3\times 3$ identity matrix --- simply the number of spatial dimensions:
+\begin{equation}
+    \delta^i_{\ i} = \delta^1_{\ 1}+\delta^2_{\ 2}+\delta^3_{\ 3} = 3\,.
+\end{equation}
+Thus:
+\begin{equation}
+    -\Gamma^i_{0j}\,\Gamma^j_{0i} = -3H^2\,.
+\end{equation}
+
+\medskip\noindent\textbf{Combining all four terms:}
+\begin{equation}
+\boxed{R_{00} = 0 + \left(-3\,\frac{\ddot{a}}{a} + 3H^2\right) + 0 + \left(-3H^2\right) = -3\,\frac{\ddot{a}}{a}\,.}
+\end{equation}
+An important feature: $R_{00}$ is independent of the spatial curvature $k$. This is because the $00$ component only involves Christoffel symbols $\Gamma^i_{0j}$, which themselves are insensitive to $k$.
+
+\subsection*{Computing $R_{ij}$}
+
+The spatial components of the Ricci tensor are more involved because the purely spatial Christoffel symbols $\Gamma^i_{jk}$ now contribute. We use the compact forms $\Gamma^0_{ij}=Hg_{ij}$ and $\Gamma^i_{0j}=H\delta^i_{\ j}$ from Eqs.~\eqref{eq:gamma0ij}--\eqref{eq:gammai0j} to organize the calculation.
+
+The key idea is to separate each term in Eq.~\eqref{eq:ricci} into contributions involving time (the Hubble parameter $H$) and those involving only the spatial geometry (the 3-dimensional Christoffel symbols). The spatial contributions will ultimately combine into the Ricci tensor of the constant-curvature 3-space.
+
+\medskip\noindent\textbf{Term 1:} $\partial_\lambda\Gamma^\lambda_{ij}$.
+
+We split the sum into $\lambda=0$ and $\lambda=k$:
+\begin{equation}
+    \partial_0\Gamma^0_{ij} + \partial_k\Gamma^k_{ij}\,.
+\end{equation}
+For the temporal part, using $\Gamma^0_{ij}=Hg_{ij}$ and $\dot{g}_{ij}=2Hg_{ij}$ (since $g_{ij}=a^2\gamma_{ij}$ with $\gamma_{ij}$ time-independent):
+\begin{equation}
+    \partial_0(Hg_{ij}) = \dot{H}\,g_{ij} + H\cdot 2Hg_{ij} = (\dot{H}+2H^2)\,g_{ij}\,.
+\end{equation}
+The spatial part $\partial_k\Gamma^k_{ij}$ is a contribution to the 3-dimensional spatial Ricci tensor, which we will combine with other spatial terms below.
+
+\medskip\noindent\textbf{Term 2:} $-\partial_j\Gamma^\lambda_{i\lambda}$.
+
+The trace $\Gamma^\lambda_{i\lambda}=\Gamma^0_{i0}+\Gamma^k_{ik}$. Since $\Gamma^0_{i0}=0$, the temporal part vanishes and we are left with:
+\begin{equation}
+    -\partial_j\Gamma^k_{ik}\,,
+\end{equation}
+which is again a purely spatial contribution.
+
+\medskip\noindent\textbf{Term 3:} $\Gamma^\lambda_{\lambda\sigma}\Gamma^\sigma_{ij}$.
+
+Splitting $\sigma=0$ and $\sigma=l$: the $\sigma=0$ part gives $\Gamma^\lambda_{\lambda 0}\cdot\Gamma^0_{ij}=3H\cdot Hg_{ij}=3H^2g_{ij}$. The $\sigma=l$ part gives $\Gamma^k_{kl}\Gamma^l_{ij}$, a spatial contribution.
+
+\medskip\noindent\textbf{Term 4:} $-\Gamma^\lambda_{j\sigma}\Gamma^\sigma_{i\lambda}$.
+
+We enumerate the four cases depending on whether $\lambda$ and $\sigma$ are temporal (0) or spatial ($k,l$):
+
+\begin{itemize}
+    \item $\lambda=0,\;\sigma=0$: $\Gamma^0_{j0}\cdot\Gamma^0_{i0}=0$
+    \item $\lambda=0,\;\sigma=k$: $\Gamma^0_{jk}\cdot\Gamma^k_{i0}=Hg_{jk}\cdot H\delta^k_{\ i}=H^2\,g_{ij}$
+    \item $\lambda=k,\;\sigma=0$: $\Gamma^k_{j0}\cdot\Gamma^0_{ik}=H\delta^k_{\ j}\cdot Hg_{ik}=H^2\,g_{ij}$
+    \item $\lambda=k,\;\sigma=l$: $\Gamma^k_{jl}\cdot\Gamma^l_{ik}$ (purely spatial)
+\end{itemize}
+So the temporal part gives $-2H^2g_{ij}$ and the spatial part is $-\Gamma^k_{jl}\Gamma^l_{ik}$.
+
+\medskip\noindent\textbf{Collecting the temporal contributions:}
+
+Gathering all terms proportional to $g_{ij}$ that involve the Hubble parameter:
+\begin{equation}\label{eq:temporal}
+    (\dot{H}+2H^2)\,g_{ij} + 3H^2\,g_{ij} - 2H^2\,g_{ij} = (\dot{H}+3H^2)\,g_{ij}\,.
+\end{equation}
+Using $\dot{H}=\ddot{a}/a-\dot{a}^2/a^2=\ddot{a}/a-H^2$:
+\begin{equation}
+    \dot{H}+3H^2 = \frac{\ddot{a}}{a}-H^2+3H^2 = \frac{\ddot{a}}{a}+2H^2\,.
+\end{equation}
+
+\medskip\noindent\textbf{Collecting the spatial contributions:}
+
+The remaining purely spatial terms (those involving only $\Gamma^i_{jk}$) combine to form ${}^{(3)}\!R_{ij}$, the Ricci tensor of the three-dimensional spatial geometry. For a space of constant curvature, this is a standard result from Riemannian geometry:
+\begin{equation}
+    {}^{(3)}\!R_{ij} = 2K\,\gamma_{ij}\,,
+\end{equation}
+where $K$ is the Gaussian curvature of the spatial slices and $\gamma_{ij}$ is the unit spatial metric ($g_{ij}=a^2\gamma_{ij}$). The Gaussian curvature is $K=k/a^2$, so:
+\begin{equation}
+    {}^{(3)}\!R_{ij} = \frac{2k}{a^2}\,g_{ij}\,.
+\end{equation}
+
+\medskip\noindent\textbf{Final result:}
+\begin{equation}
+\boxed{R_{ij} = \left(\frac{\ddot{a}}{a} + 2H^2 + \frac{2k}{a^2}\right)g_{ij}\,.}
+\end{equation}
+
+\subsection{The Ricci Scalar}
+
+The Ricci scalar is obtained by contracting the Ricci tensor with the inverse metric. In other words, it is simply the trace of the Ricci tensor, and it provides a single number at each spacetime point that characterises the overall curvature:
+\begin{equation}
+    R = g^{\mu\nu}R_{\mu\nu}\,.
+\end{equation}
+We split this contraction into temporal and spatial parts. For the spatial part, note that $g^{ij}g_{ij}=\delta^i_{\ i}=3$ (the trace of the identity in three dimensions):
+\begin{align}
+    R &= g^{00}R_{00} + g^{ij}R_{ij} \nonumber\\[4pt]
+      &= (-1)\!\left(-3\,\frac{\ddot{a}}{a}\right) + g^{ij}\!\left(\frac{\ddot{a}}{a}+2H^2+\frac{2k}{a^2}\right)g_{ij} \nonumber\\[4pt]
+      &= 3\,\frac{\ddot{a}}{a} + 3\!\left(\frac{\ddot{a}}{a}+2H^2+\frac{2k}{a^2}\right).
+\end{align}
+\begin{equation}
+\boxed{R = 6\,\frac{\ddot{a}}{a} + 6H^2 + \frac{6k}{a^2} = 6\!\left(\frac{\ddot{a}}{a} + H^2 + \frac{k}{a^2}\right).}
+\end{equation}
+The Ricci scalar depends on both $\ddot{a}$ (acceleration of the expansion) and $k$ (spatial curvature). As a consistency check, for a flat, matter-dominated Universe ($k=0$, $a\propto t^{2/3}$), one can verify that $R=4/(3t^2)$.
+
+\subsection*{The Einstein Tensor $G_{00}$}
+
+The Einstein tensor is defined as
+\begin{equation}
+    G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}\,g_{\mu\nu}\,R\,.
+\end{equation}
+The subtraction of the trace term $\frac{1}{2}g_{\mu\nu}R$ is precisely what is needed to ensure that $G_{\mu\nu}$ is divergence-free ($\nabla^\mu G_{\mu\nu}=0$), a consequence of the Bianchi identity. This property is essential for consistency with energy--momentum conservation ($\nabla^\mu T_{\mu\nu}=0$) in the Einstein field equations.
+
+For the $00$ component:
+\begin{align}
+    G_{00} &= R_{00} - \frac{1}{2}\,g_{00}\,R \nonumber\\[4pt]
+           &= -3\,\frac{\ddot{a}}{a} - \frac{1}{2}(-1)\cdot 6\!\left(\frac{\ddot{a}}{a}+H^2+\frac{k}{a^2}\right) \nonumber\\[4pt]
+           &= -3\,\frac{\ddot{a}}{a} + 3\,\frac{\ddot{a}}{a} + 3H^2 + \frac{3k}{a^2}\,.
+\end{align}
+The $\ddot{a}$ terms cancel exactly. This is a remarkable and important feature: the $00$ component of the Einstein equation involves only the first time derivative of $a(t)$, not the second. This means the first Friedmann equation is a \emph{constraint equation} (analogous to the Hamiltonian constraint in the ADM formalism of general relativity), not a dynamical evolution equation. It constrains the initial conditions of the Universe rather than governing the time evolution.
+\begin{equation}
+\boxed{G_{00} = 3H^2 + \frac{3k}{a^2} = 3\!\left(\frac{\dot{a}^2}{a^2}+\frac{k}{a^2}\right) = \frac{3(\dot{a}^2+k)}{a^2}\,.}
+\end{equation}
+
+\subsection{The Energy--Momentum Tensor}
+
+The matter content of the Universe is modelled as a perfect fluid, which is the most general form consistent with the homogeneity and isotropy of the FLRW metric. A perfect fluid is fully characterised by its energy density $\rho$ and pressure $p$, both measured in the rest frame of the fluid. 
+
+
+The energy-momentum tensor in mixed form is
+\begin{equation}
+    T^{\mu}_{\ \nu} =
+    \begin{pmatrix}
+    -\rho c^{2} & 0 & 0 & 0 \\
+    0 & p & 0 & 0 \\
+    0 & 0 & p & 0 \\
+    0 & 0 & 0 & p
+    \end{pmatrix},
+\end{equation}
+however, in the field equations we need to lower an index. We lower the upper index using the metric:
+\begin{equation}
+    T_{\mu\nu} = g_{\mu\lambda}\,T^{\lambda}_{\ \nu}.
+\end{equation}
+Since the metric is diagonal, this simply multiplies each row by the corresponding $g_{\mu\mu}$. The FLRW metric components are:
+\begin{equation}
+    g_{00} = -1, \qquad
+    g_{11} = \frac{a^{2}}{1-kr^{2}}, \qquad
+    g_{22} = a^{2}r^{2}, \qquad
+    g_{33} = a^{2}r^{2}\sin^{2}\!\theta.
+\end{equation}
+For the time--time component:
+\begin{equation}
+    T_{00} = g_{00}\,T^{0}_{\ 0} = (-1)(-\rho c^{2}) = \rho c^{2}.
+\end{equation}
+For the spatial components:
+\begin{equation}
+    T_{11} = g_{11}\,T^{1}_{\ 1} = \frac{a^{2}\,p}{1-kr^{2}}, \qquad
+    T_{22} = a^{2}r^{2}\,p, \qquad
+    T_{33} = a^{2}r^{2}\sin^{2}\!\theta\;p.
+\end{equation}
+So:
+\begin{equation}
+    T_{\mu\nu} =
+    \begin{pmatrix}
+    \rho c^{2} & 0 & 0 & 0 \\[6pt]
+    0 & \dfrac{a^{2}\,p}{1-kr^{2}} & 0 & 0 \\[6pt]
+    0 & 0 & a^{2}r^{2}\,p & 0 \\[6pt]
+    0 & 0 & 0 & a^{2}r^{2}\sin^{2}\!\theta\;p
+    \end{pmatrix},
+\end{equation}
+or more compactly, $T_{00} = \rho c^{2}$ and $T_{ij} = p\,g_{ij}$. The spatial components carry all the metric factors from $g_{ij}$, while the time--time component is simply the energy density---the pressure terms cancel as shown above.
+
+%Its energy--momentum tensor is:
+%\begin{equation}
+%T_{\mu\nu} = (\rho+p)\,u_\mu u_\nu + p\,g_{\mu\nu}\,,
+%\end{equation}
+%where $u^\mu$ is the four-velocity of the fluid. In comoving coordinates (where the fluid is at rest with respect to the Hubble flow), $u^\mu=(1,0,0,0)$ and $u_\mu=g_{\mu\nu}u^\nu=(-1,0,0,0)$. The $00$ component is then:
+%\begin{equation}
+%T_{00} = (\rho+p)(-1)(-1) + p(-1) = \rho+p-p = \rho\,.
+%\end{equation}
+%This makes physical sense: the energy density measured by a comoving observer is simply $\rho$.
+
+\subsection{The First Friedmann Equation}
+
+We now have all the ingredients to assemble the dynamical equation governing the expansion of the Universe. The Einstein field equations relate the geometry of spacetime (encoded in $G_{\mu\nu}$) to its matter content (encoded in $T_{\mu\nu}$):
+\begin{equation}
+    G_{\mu\nu} = 8\pi G\,T_{\mu\nu}\,.
+\end{equation}
+Applying this for the $00$ component:
+\begin{equation}
+    3H^2 + \frac{3k}{a^2} = 8\pi G\,\rho\,,
+\end{equation}
+which gives the \textbf{first Friedmann equation}:
+\begin{equation}
+\boxed{H^2 = \left(\frac{\dot{a}}{a}\right)^{\!2} = \frac{8\pi G}{3}\,\rho - \frac{k}{a^2}\,.}
+\end{equation}
+This equation governs the expansion rate of the Universe. The left-hand side is the square of the Hubble parameter, and the right-hand side contains two contributions: the energy density $\rho$ (which drives expansion) and the spatial curvature term $k/a^2$ (which modifies the expansion rate depending on the geometry of spatial slices). For $k=0$ (flat Universe), the expansion rate is determined solely by the energy density, and there exists a \textbf{critical density}
+\begin{equation}
+    \rho_{\rm crit} \equiv \frac{3H^2}{8\pi G}\,.
+\end{equation}
+For any energy component $i$, we define its \textbf{density parameter} as the dimensionless ratio
+\begin{equation}\label{eq:density_parameter}
+    \Omega_i \equiv \frac{\rho_i}{\rho_{\rm crit}}\,.
+\end{equation}
+When the total density equals the critical density ($\Omega_{\rm tot}=1$), space is exactly flat. We can also absorb the curvature term into this language by defining $\Omega_k\equiv -k/(aH)^2$, so that the first Friedmann equation becomes simply $\Omega_{\rm tot}+\Omega_k=1$. Current observations indicate that the Universe is very close to flat, $|\Omega_k|\lesssim 10^{-3}$.
+
+\subsection{The Second Friedmann Equation}
+
+What about the spatial components of $G_{\mu\nu}$? You may try this as an exercise, but for now lets skip to the result. (Hint: by Isotropy, all spatial components lead to the same result, so just choose one of them). We now have everything to derive the \textbf{second Friedmann equation} (also known as the acceleration or Raychaudhuri equation):
+\begin{equation}
+\boxed{\frac{\ddot{a}}{a} = -\frac{4\pi G}{3}\,(\rho+3p)\,.}
+\end{equation}
+
+This equation is independent of $k$ and reveals a deep physical result: the combination $\rho+3p$ determines whether the expansion accelerates or decelerates. For ordinary matter ($p\geq 0$) and radiation ($p=\rho/3$), we have $\rho+3p>0$, implying $\ddot{a}<0$ --- the expansion decelerates. The discovery that the expansion of the Universe is in fact \emph{accelerating} therefore requires a component with $\rho+3p<0$, i.e.\ with sufficiently negative pressure ($p<-\rho/3$). This is the observational evidence for dark energy, which in its simplest form is a cosmological constant $\Lambda$ with equation of state $w=p/\rho=-1$.
+
+\subsection{Conformal Time}
+
+Before moving on, it is useful to note an alternative time coordinate. Defining \textbf{conformal time} $\eta$ by $d\eta = dt/a(t)$, the FLRW metric becomes conformally flat in the $k=0$ case:
+\begin{equation}
+    ds^{2} = a^{2}(\eta)\!\left[-c^{2}\,d\eta^{2}
+    + d\chi^{2} + \chi^{2}\,d\Omega^{2}\right],
+    \label{eq:conformal}
+\end{equation}
+where $d\Omega^{2} = d\theta^{2} + \sin^{2}\!\theta\;d\phi^{2}$. This form is essential for studying causal structure (light cones are $45^{\circ}$ lines on a $\chi$--$\eta$ diagram), for CMB physics, and for cosmological perturbation theory.
+
+
+\section{Newtonian Derivation of the Friedmann Equations}
+
+Consider a homogeneous, isotropic universe filled with matter of uniform density $\rho(t)$. We examine a thin spherical shell of mass $m$ at the surface of a sphere of radius $r(t)$, centred on an arbitrary point. By Birkhoff's theorem (or its Newtonian analogue, the shell theorem), only the mass interior to the shell exerts a net gravitational force.
+
+The physical radius of the shell evolves with the expansion:
+\begin{equation}\label{eq:comoving}
+    r(t) = a(t)\,r_0\,,
+\end{equation}
+where $r_0$ is a fixed comoving radius and $a(t)$ is the scale factor. The total mass enclosed is
+\begin{equation}\label{eq:mass}
+    M = \frac{4}{3}\pi r^3\rho = \frac{4}{3}\pi a^3 r_0^3\,\rho\,.
+\end{equation}
+
+\subsection*{First Friedmann Equation from Energy Conservation}
+
+The test shell of mass $m$ has kinetic energy
+\begin{equation}
+    T = \frac{1}{2}m\dot{r}^2 = \frac{1}{2}m\dot{a}^2 r_0^2\,,
+\end{equation}
+and gravitational potential energy due to the enclosed mass $M$:
+\begin{equation}
+    U = -\frac{GmM}{r} = -\frac{Gm}{a\,r_0}\cdot\frac{4}{3}\pi a^3 r_0^3\,\rho = -\frac{4\pi G}{3}\,m\,a^2 r_0^2\,\rho\,.
+\end{equation}
+Total energy is conserved:
+\begin{equation}\label{eq:energy}
+    \frac{1}{2}m\dot{a}^2 r_0^2 - \frac{4\pi G}{3}\,m\,a^2 r_0^2\,\rho = E\,,
+\end{equation}
+where $E$ is a constant.
+
+Dividing Eq.~\eqref{eq:energy} by $\frac{1}{2}m\,a^2 r_0^2$:
+\begin{equation}
+    \frac{\dot{a}^2}{a^2} - \frac{8\pi G}{3}\,\rho = \frac{2E}{m\,a^2 r_0^2}\,.
+\end{equation}
+We define the constant
+\begin{equation}
+    k \equiv -\frac{2E}{m\,r_0^2}\,,
+\end{equation}
+so that the right-hand side becomes $-k/a^2$. This gives the \textbf{first Friedmann equation}:
+\begin{equation}
+\boxed{H^2 = \left(\frac{\dot{a}}{a}\right)^{\!2} = \frac{8\pi G}{3}\,\rho - \frac{k}{a^2}\,.}
+\end{equation}
+
+\subsection*{Interpretation of $k$}
+
+The constant $k$ is related to the total energy of the shell:
+\begin{itemize}
+    \item $E<0$ $\Rightarrow$ $k>0$: The shell is gravitationally bound. In GR this corresponds to a closed universe (positive spatial curvature).
+    \item $E=0$ $\Rightarrow$ $k=0$: The shell has exactly the escape energy. This is the flat universe, expanding forever but asymptotically approaching zero velocity.
+    \item $E>0$ $\Rightarrow$ $k<0$: The shell is unbound and expands forever. In GR this corresponds to an open universe (negative spatial curvature).
+\end{itemize}
+Remarkably, the Newtonian energy constant maps directly onto the spatial curvature parameter of general relativity.
+
+\subsection*{Second Friedmann Equation from Newton's Second Law}
+
+The gravitational acceleration of the shell due to the enclosed mass is
+\begin{equation}
+    \ddot{r} = -\frac{GM}{r^2}\,.
+\end{equation}
+Substituting $r=a\,r_0$ (so $\ddot{r}=\ddot{a}\,r_0$) and $M=\frac{4}{3}\pi a^3 r_0^3\,\rho$:
+\begin{equation}
+    \ddot{a}\,r_0 = -\frac{G}{a^2 r_0^2}\cdot\frac{4}{3}\pi a^3 r_0^3\,\rho = -\frac{4\pi G}{3}\,a\,r_0\,\rho\,.
+\end{equation}
+Dividing by $a\,r_0$:
+\begin{equation}\label{eq:newton_accel}
+    \frac{\ddot{a}}{a} = -\frac{4\pi G}{3}\,\rho\,.
+\end{equation}
+
+Equation~\eqref{eq:newton_accel} is the purely Newtonian result, which contains only the mass density $\rho$. In general relativity, pressure also gravitates. As we saw in the full GR derivation above, including the relativistic energy--momentum tensor replaces $\rho$ with $(\rho+3p)$ in the acceleration equation.
+
+
+\section{The Fluid (Continuity) Equation}
+There are three ways to derive the continuity: from the covariant conservation of the energy-momentum tensor, from the first law of thermodynamics applied to a comoving volume, or simply by combining and rearranging the Friedmann equations. For brevity let us just consider the latter derivation.
+
+We start from the two Friedmann equations:
+\begin{align}
+    H^{2} \equiv \left(\frac{\dot{a}}{a}\right)^{\!2}
+    &= \frac{8\pi G}{3}\,\rho - \frac{kc^{2}}{a^{2}}\,,
+    \label{eq:F1}\\[6pt]
+    \frac{\ddot{a}}{a}
+    &= -\frac{4\pi G}{3}\!\left(\rho + \frac{3p}{c^{2}}\right).
+    \label{eq:F2}
+\end{align}
+We work without $\Lambda$ for clarity; the result is unchanged if $\Lambda$ is included, since $\Lambda$ contributes a constant to both equations that drops out upon differentiation.
+
+\medskip
+\noindent\textbf{Step 1.} Multiply both sides of~\eqref{eq:F1} by $a^{2}$:
+\begin{equation}
+    \dot{a}^{2} = \frac{8\pi G}{3}\,\rho\,a^{2} - kc^{2}.
+    \label{eq:F1_rewrite}
+\end{equation}
+
+\noindent\textbf{Step 2.} Differentiate~\eqref{eq:F1_rewrite} with respect to $t$. Since $k$ is a constant, the $kc^{2}$ term drops out:
+\begin{equation}
+    2\dot{a}\,\ddot{a}
+    = \frac{8\pi G}{3}\!\left(\dot{\rho}\,a^{2} + 2\rho\,a\,\dot{a}\right).
+    \label{eq:diff}
+\end{equation}
+
+\noindent\textbf{Step 3.} Divide both sides of~\eqref{eq:diff} by $2a\dot{a}$ (assuming $a\neq 0$ and $\dot{a}\neq 0$):
+\begin{equation}
+    \frac{\ddot{a}}{a}
+    = \frac{8\pi G}{3}\!\left(\frac{\dot{\rho}}{2H} + \rho\right),
+    \label{eq:divided}
+\end{equation}
+where we used $\dot{a}/a = H$.
+
+\medskip
+\noindent\textbf{Step 4.} The left-hand side of~\eqref{eq:divided} is $\ddot{a}/a$, which is given by the second Friedmann equation~\eqref{eq:F2}. Substituting:
+\begin{equation}
+    -\frac{4\pi G}{3}\!\left(\rho + \frac{3p}{c^{2}}\right)
+    = \frac{8\pi G}{3}\!\left(\frac{\dot{\rho}}{2H} + \rho\right).
+\end{equation}
+
+\noindent\textbf{Step 5.} Divide both sides by $\frac{4\pi G}{3}$:
+\begin{equation}
+    -\left(\rho + \frac{3p}{c^{2}}\right)
+    = 2\!\left(\frac{\dot{\rho}}{2H} + \rho\right)
+    = \frac{\dot{\rho}}{H} + 2\rho.
+\end{equation}
+
+Collecting the $\rho$ terms on the left-hand side:
+\begin{equation}
+    -3\rho - \frac{3p}{c^{2}} = \frac{\dot{\rho}}{H}
+    \qquad\Longrightarrow\qquad
+    -3\!\left(\rho + \frac{p}{c^{2}}\right) = \frac{\dot{\rho}}{H}\,.
+\end{equation}
+
+\noindent\textbf{Step 6.} Multiply both sides by $H$:
+\begin{equation}
+    \boxed{\;
+    \dot{\rho} + 3H\!\left(\rho + \frac{p}{c^{2}}\right) = 0
+    \;}
+    \label{eq:continuity_derived}
+\end{equation}
+
+This is the continuity equation, derived purely algebraically from the two Friedmann equations without any thermodynamic input. The curvature constant $k$ dropped out at Step~2 because it is a constant---this is a useful consistency check. If $\Lambda$ were included, it would similarly drop out since $\dot{\Lambda}=0$.
+
+The physical content of this equation is straightforward: the energy density in a comoving volume changes because the expansion does $p\,dV$ work on its surroundings.
+
+For a fluid with equation of state $p = w\rho c^{2}$, the continuity equation becomes
+\begin{equation}
+    \dot{\rho} + 3(1+w)\,H\,\rho = 0,
+\end{equation}
+which separates and integrates immediately to give
+\begin{equation}
+    \rho \propto a^{-3(1+w)}.
+    \label{eq:rho_scaling}
+\end{equation}
+
+The three standard cases are:
+\begin{itemize}
+    \item \textbf{Dust (matter),} $w = 0$: $\rho_{m} \propto a^{-3}$. The energy density falls simply because a fixed number of particles is diluted by the growing volume.
+    \item \textbf{Radiation,} $w = \tfrac{1}{3}$: $\rho_{r} \propto a^{-4}$. In addition to the $a^{-3}$ volume dilution, each photon loses an extra factor of $a^{-1}$ because its wavelength is stretched by the expansion, reducing its energy as $E = hc/\lambda \propto a^{-1}$.
+    \item \textbf{Cosmological constant (vacuum energy),} $w = -1$: $\rho_{\Lambda} = \mathrm{const}$. The negative pressure $p = -\rho_{\Lambda}c^{2}$ does precisely enough work to replenish the energy in the expanding volume, so the density remains constant.
+\end{itemize}
+
+
+\section{The Cosmological Constant}
+
+\subsection*{Historical motivation: Einstein's static universe}
+
+When Einstein applied general relativity to cosmology in 1917, the prevailing view was that the Universe is \emph{static} --- neither expanding nor contracting. However, as we have seen, the Friedmann equations do not admit a static solution for a universe filled with ordinary matter. Setting $\dot{a}=0$ in the first Friedmann equation requires a precise balance between the density and curvature terms, but the second Friedmann equation then gives $\ddot{a}<0$ for any fluid with $\rho+3p>0$, meaning the static configuration is not in equilibrium: it would immediately begin to contract.
+
+To remedy this, Einstein introduced a new constant $\Lambda$ --- the \textbf{cosmological constant} --- directly into his field equations. The idea was simple: add a repulsive term that can counteract gravitational attraction and permit a static solution.
+
+\subsection*{The modified Einstein field equations}
+
+The most general form of the field equations consistent with the symmetries of general relativity is
+\begin{equation}
+\label{eq:EFE_Lambda}
+    G_{\mu\nu} + \Lambda\, g_{\mu\nu} = 8\pi G\, T_{\mu\nu}\,.
+\end{equation}
+The $\Lambda g_{\mu\nu}$ term is permitted because the metric tensor is covariantly constant ($\nabla_\alpha g_{\mu\nu}=0$), so this addition preserves the Bianchi identity $\nabla_\mu G^{\mu\nu}=0$ and hence the conservation law $\nabla_\mu T^{\mu\nu}=0$. In other words, $\Lambda$ is a \emph{geometrical constant of integration} that Einstein originally set to zero for simplicity, but which the mathematical structure of GR allows.
+
+\subsection*{Modified Friedmann equations}
+
+Applying the modified field equations~\eqref{eq:EFE_Lambda} to the FLRW metric proceeds exactly as before. The $\Lambda g_{\mu\nu}$ term contributes an additional $-\Lambda$ to the $00$ component of $G_{\mu\nu}+\Lambda g_{\mu\nu}$ (since $g_{00}=-1$), and $+\Lambda a^2\delta_{ij}$ to the spatial components. Working through the algebra, the two Friedmann equations become:
+
+\medskip
+\noindent\textbf{First Friedmann equation (with $\Lambda$):}
+\begin{equation}
+\boxed{H^2 = \left(\frac{\dot{a}}{a}\right)^{\!2} = \frac{8\pi G}{3}\,\rho - \frac{k}{a^2} + \frac{\Lambda}{3}\,.}
+\label{eq:F1_Lambda}
+\end{equation}
+
+\noindent\textbf{Second Friedmann equation (with $\Lambda$):}
+\begin{equation}
+\boxed{\frac{\ddot{a}}{a} = -\frac{4\pi G}{3}\,(\rho+3p) + \frac{\Lambda}{3}\,.}
+\label{eq:F2_Lambda}
+\end{equation}
+
+The cosmological constant thus enters as a constant positive contribution to $H^2$ and to the acceleration $\ddot{a}/a$. When $\Lambda>0$, it acts to \emph{accelerate} the expansion.
+
+\subsection*{Einstein's static universe}
+
+With $\Lambda$ in hand, Einstein could now seek a static solution. Setting $\dot{a}=0$ and $\ddot{a}=0$ in Eqs.~\eqref{eq:F1_Lambda}--\eqref{eq:F2_Lambda}, we obtain two conditions. From the second equation:
+\begin{equation}
+    \Lambda = 4\pi G\,(\rho + 3p)\,.
+\end{equation}
+For pressureless dust ($p=0$), this simplifies to $\Lambda = 4\pi G\rho$. Substituting into the first equation with $\dot{a}=0$:
+\begin{equation}
+    0 = \frac{8\pi G}{3}\,\rho - \frac{k}{a^2} + \frac{4\pi G\rho}{3} = 4\pi G\rho - \frac{k}{a^2}\,,
+\end{equation}
+which gives $k = 4\pi G\rho\, a^2 > 0$. Einstein's static universe is therefore \emph{closed} (positively curved), with the cosmological constant precisely tuned to balance the gravitational attraction of matter.
+
+However, this solution is \textbf{unstable}. Consider a small perturbation that slightly increases $a$. The matter density decreases ($\rho\propto a^{-3}$), but $\Lambda$ is a constant. The repulsive effect of $\Lambda$ therefore wins, driving the universe into further expansion --- a runaway instability. A small contraction similarly leads to collapse. Einstein's static universe sits atop an unstable equilibrium, like a ball balanced on a hilltop.
+
+\subsection*{Vacuum energy interpretation}
+
+There is an elegant alternative viewpoint: rather than treating $\Lambda$ as a geometrical term on the left-hand side of the field equations, we can move it to the right-hand side and interpret it as an \emph{effective energy--momentum tensor}. Define
+\begin{equation}
+    \rho_\Lambda \equiv \frac{\Lambda}{8\pi G}\,, \qquad p_\Lambda = -\rho_\Lambda\, c^2\,.
+\end{equation}
+This is a fluid with equation of state $w \equiv p/(\rho c^2) = -1$, i.e.\ a constant energy density with negative pressure. With this identification, the modified Friedmann equations reduce to the standard form with $\rho\to\rho+\rho_\Lambda$ and $p\to p+p_\Lambda$. The associated density parameter is
+\begin{equation}
+    \Omega_\Lambda \equiv \frac{\rho_\Lambda}{\rho_{\rm crit}} = \frac{\Lambda}{3H^2}\,.
+\end{equation}
+
+In quantum field theory, the vacuum is not empty but filled with zero-point fluctuations that contribute a constant energy density --- precisely the properties of $\Lambda$. This motivates the identification of the cosmological constant with \textbf{vacuum energy}. However, naive quantum field theory estimates overpredict the observed value by some 120 orders of magnitude, making the smallness of $\Lambda$ one of the deepest unsolved problems in physics.
+
+\subsection*{From ``greatest blunder'' to dark energy}
+
+After Hubble's 1929 discovery that the Universe is expanding, the original motivation for $\Lambda$ evaporated, and Einstein reportedly called its introduction his ``greatest blunder.'' For most of the 20th century, $\Lambda$ was set to zero by convention.
+
+This changed dramatically in 1998, when observations of distant Type Ia supernovae by Riess et al.\ and Perlmutter et al.\ revealed that the expansion of the Universe is \emph{accelerating} --- a result that requires a component with $w<-1/3$. The simplest explanation is a cosmological constant with $\Omega_{\Lambda,0}\approx 0.7$, making it the dominant component of the Universe today. This is the foundation of the $\Lcdm$ model, the current standard model of cosmology.
+
+
+\section{Solving the Friedmann Equations}
+
+
+\subsection{Matter-Dominated Universe: Flat Case}
+
+Consider a comoving volume --- a cube whose edges expand with the universe. The cube contains a fixed number of non-relativistic particles (galaxies, dust, dark matter) of total mass $M$. As the universe expands, the volume of the cube grows as $a^3$, but the mass inside stays the same. Therefore the matter density is
+\begin{equation}
+    \rho_m(t) = \frac{M}{V(t)} = \frac{M}{V_0\,a^3(t)} = \frac{\rho_{m,0}}{a^3(t)}\,,
+\end{equation}
+where $\rho_{m,0}\equiv M/V_0$ is the density today (when $a=1$ by convention). The key point: matter density dilutes purely from the volume increasing. Nothing happens to the mass of individual particles.
+
+The first Friedmann equation with $k=0$ is
+\begin{equation}\label{eq:fried_flat_matter}
+    H^2 = \left(\frac{\dot{a}}{a}\right)^2 = \frac{8\pi G}{3}\,\rho_m = \frac{8\pi G}{3}\,\frac{\rho_{m,0}}{a^3}\,.
+\end{equation}
+Taking the square root:
+\begin{equation}
+    \frac{\dot{a}}{a} = \sqrt{\frac{8\pi G\rho_{m,0}}{3}}\;\frac{1}{a^{3/2}}\,.
+\end{equation}
+Define the constant $A\equiv\sqrt{8\pi G\rho_{m,0}/3}$ to keep things clean:
+\begin{equation}\label{eq:matter_ode}
+    \dot{a} = A\,a^{-1/2}\,.
+\end{equation}
+
+This is a separable ODE. Rearranging:
+\begin{equation}
+    a^{1/2}\,da = A\,dt\,.
+\end{equation}
+Integrating both sides (with $a=0$ at $t=0$, i.e.\ the Big Bang):
+\begin{equation}
+    \int_0^a a'^{1/2}\,da' = A\int_0^t dt'\,.
+\end{equation}
+The left-hand side gives
+\begin{equation}
+    \frac{2}{3}\,a^{3/2} = At\,.
+\end{equation}
+Solving for $a$:
+\begin{equation}
+\boxed{a(t) = \left(\frac{3A}{2}\right)^{2/3}t^{2/3} \propto t^{2/3}\,.}
+\end{equation}
+This is the \textbf{Einstein--de Sitter solution}. The universe expands forever, but decelerates: $\ddot{a}<0$.
+
+\subsection*{Properties of the solution}
+
+The Hubble parameter is
+\begin{equation}
+    H(t) = \frac{\dot{a}}{a} = \frac{2}{3t}\,,
+\end{equation}
+so the age of a flat, matter-dominated universe is
+\begin{equation}
+    t_0 = \frac{2}{3H_0}\,.
+\end{equation}
+For $H_0\approx 70\;\text{km/s/Mpc}$, this gives $t_0\approx 9.3$ Gyr --- somewhat less than the actual age of the universe ($\approx 13.8$ Gyr), indicating that matter alone does not tell the whole story.
+
+The deceleration parameter is
+\begin{equation}
+    q \equiv -\frac{a\ddot{a}}{\dot{a}^2} = \frac{1}{2}\,,
+\end{equation}
+confirming that the expansion is decelerating.
+
+
+\subsection{Matter-Dominated Universe: Including Curvature}
+
+Now we include the curvature term:
+\begin{equation}\label{eq:fried_matter_k}
+    H^2 = \frac{8\pi G}{3}\,\frac{\rho_{m,0}}{a^3} - \frac{k}{a^2}\,.
+\end{equation}
+Using the density parameter introduced in Eq.~\eqref{eq:density_parameter}, $\Omega_m \equiv \rho_m/\rho_{\rm crit}$, and evaluating today ($a=1$):
+\begin{equation}
+    H_0^2 = \frac{8\pi G}{3}\,\rho_{m,0} - k\,,
+\end{equation}
+which gives $k = H_0^2(\Omega_{m,0}-1)$. So:
+\begin{itemize}
+    \item $\Omega_{m,0}=1$ $\Rightarrow$ $k=0$: flat (the Einstein--de Sitter case above).
+    \item $\Omega_{m,0}>1$ $\Rightarrow$ $k>0$: closed universe.
+    \item $\Omega_{m,0}<1$ $\Rightarrow$ $k<0$: open universe.
+\end{itemize}
+
+\subsection*{Qualitative behaviour}
+
+To understand the solutions without solving the equation exactly, rewrite Eq.~\eqref{eq:fried_matter_k} as
+\begin{equation}
+    \dot{a}^2 = \frac{8\pi G\rho_{m,0}}{3}\,\frac{1}{a} - k\,.
+\end{equation}
+Think of this as an energy equation: $\dot{a}^2$ is the ``kinetic energy'' of the expansion, the first term is the ``gravitational potential,'' and $-k$ plays the role of total energy.
+
+\medskip\noindent\textbf{Closed universe ($k>0$):} The right-hand side reaches zero when
+\begin{equation}
+    a_{\rm max} = \frac{8\pi G\rho_{m,0}}{3k}\,.
+\end{equation}
+At this point, $\dot{a}=0$ and the expansion halts. The universe then recollapses in a time-reversed Big Bang (the ``Big Crunch''). The full solution is a cycloid.
+
+\medskip\noindent\textbf{Open universe ($k<0$):} Since $-k>0$, we have $\dot{a}^2>0$ for all $a$. The expansion never halts. At late times, the $1/a$ term becomes negligible and $\dot{a}\to\sqrt{-k}=\text{const}$, so the universe expands linearly: $a\propto t$. The universe becomes ``empty'' and coasts.
+
+\medskip\noindent\textbf{Flat universe ($k=0$):} The borderline case. The expansion slows but never quite stops: $\dot{a}\to 0$ as $t\to\infty$. This is the $a\propto t^{2/3}$ solution derived above.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{scale_factor_various_model}
+    \caption{Top: the three spatial geometries --- open (negative curvature), closed (positive curvature), and flat. Bottom: the scale factor $a(t)$ as a function of time for closed, flat, open, and accelerating cosmological models. The closed universe recollapses in a Big Crunch, while the open and flat cases expand forever. An accelerating universe (driven by a cosmological constant) overtakes all decelerating models at late times.}
+    \label{fig:scale_factor_various}
+\end{figure}
+
+\subsection*{Parametric solutions: derivation}
+
+We now solve the ODE exactly. Define the constant
+\begin{equation}\label{eq:C_def}
+    C \equiv \frac{8\pi G\rho_{m,0}}{3}\,,
+\end{equation}
+so that Eq.~\eqref{eq:fried_matter_k} can be written as
+\begin{equation}\label{eq:adot_sq}
+    \dot{a}^2 = \frac{C}{a} - k\,.
+\end{equation}
+This is a separable first-order ODE. Taking the positive root (expanding phase) and integrating from the Big Bang ($a=0$ at $t=0$):
+\begin{equation}\label{eq:t_integral}
+    t = \int_0^{a}\frac{da'}{\sqrt{C/a'-k}}\,.
+\end{equation}
+This integral cannot be evaluated in terms of elementary functions of $a$, but it \emph{can} be solved by introducing a parametric variable. We treat the closed and open cases in turn.
+
+\medskip\noindent\textbf{Closed universe ($k=+1$): the cycloid.}
+
+\medskip\noindent\emph{Step 1 --- Substitution.} The integrand in Eq.~\eqref{eq:t_integral} has the form $(C/a-1)^{-1/2}$, which vanishes at $a=C$ (the turnaround point $a_{\rm max}=C$ for $k=1$). This suggests a trigonometric substitution. Set
+\begin{equation}\label{eq:closed_sub}
+    a = \frac{C}{2}(1-\cos\eta)\,,
+\end{equation}
+so that $a$ ranges from $0$ (at $\eta=0$) to $C$ (at $\eta=\pi$) and back to $0$ (at $\eta=2\pi$). Differentiating:
+\begin{equation}
+    da = \frac{C}{2}\sin\eta\;d\eta\,.
+\end{equation}
+
+\medskip\noindent\emph{Step 2 --- Simplify $\sqrt{C/a-1}$.} Substituting Eq.~\eqref{eq:closed_sub}:
+\begin{equation}
+    \frac{C}{a} - 1 = \frac{C}{\frac{C}{2}(1-\cos\eta)} - 1
+    = \frac{2}{1-\cos\eta} - 1
+    = \frac{2-(1-\cos\eta)}{1-\cos\eta}
+    = \frac{1+\cos\eta}{1-\cos\eta}\,.
+\end{equation}
+Using the half-angle identities $1+\cos\eta = 2\cos^2(\eta/2)$ and $1-\cos\eta = 2\sin^2(\eta/2)$:
+\begin{equation}
+    \frac{C}{a}-1 = \frac{\cos^2(\eta/2)}{\sin^2(\eta/2)}\,,
+    \qquad\text{so}\qquad
+    \sqrt{\frac{C}{a}-1} = \frac{\cos(\eta/2)}{\sin(\eta/2)}\,.
+\end{equation}
+
+\medskip\noindent\emph{Step 3 --- Compute $dt$.} From the ODE, $dt = da/\sqrt{C/a-k}$. With $k=1$:
+\begin{align}
+    dt &= \frac{da}{\sqrt{C/a-1}}
+    = \frac{\frac{C}{2}\sin\eta\;d\eta}{\dfrac{\cos(\eta/2)}{\sin(\eta/2)}}
+    = \frac{C}{2}\sin\eta\;\frac{\sin(\eta/2)}{\cos(\eta/2)}\;d\eta\,.
+\end{align}
+Now use the double-angle identity $\sin\eta = 2\sin(\eta/2)\cos(\eta/2)$:
+\begin{align}
+    dt &= \frac{C}{2}\cdot 2\sin(\eta/2)\cos(\eta/2)\cdot\frac{\sin(\eta/2)}{\cos(\eta/2)}\;d\eta
+    = C\sin^2(\eta/2)\;d\eta\,.
+\end{align}
+Recognising $2\sin^2(\eta/2)=1-\cos\eta$, this can be written neatly as
+\begin{equation}
+    dt = \frac{C}{2}(1-\cos\eta)\;d\eta\,.
+\end{equation}
+
+\medskip\noindent\emph{Step 4 --- Integrate.} With $\eta=0$ at $t=0$:
+\begin{equation}
+    t = \frac{C}{2}\int_0^{\eta}(1-\cos\eta')\;d\eta' = \frac{C}{2}\bigl[\eta'-\sin\eta'\bigr]_0^{\eta} = \frac{C}{2}(\eta-\sin\eta)\,.
+\end{equation}
+
+\medskip\noindent\emph{Result.} For $k=+1$ and $a_{\rm max}=C$, the solution is
+\begin{equation}
+\boxed{
+    a = \frac{a_{\rm max}}{2}(1-\cos\eta)\,,\qquad
+    t = \frac{a_{\rm max}}{2}(\eta-\sin\eta)\,.}
+    \label{eq:cycloid}
+\end{equation}
+This is the equation of a \textbf{cycloid} --- the curve traced by a point on the rim of a wheel of radius $a_{\rm max}/2$ rolling along the $t$-axis.
+
+\medskip\noindent\emph{Check the limits:}
+\begin{itemize}
+    \item $\eta=0$: $a=0$, $t=0$ --- Big Bang.
+    \item $\eta=\pi$: $a=a_{\rm max}=C$, $t=\frac{C}{2}(\pi-0)=\frac{\pi C}{2}$ --- maximum expansion; $\dot{a}=0$ (turnaround).
+    \item $\eta=2\pi$: $a=0$, $t=\pi C$ --- Big Crunch. The total lifetime of the universe is $\pi C = \pi a_{\rm max}$.
+\end{itemize}
+
+\medskip\noindent\textbf{Open universe ($k=-1$): the hyperbolic solution.}
+
+\medskip\noindent The derivation follows the same logic, with trigonometric functions replaced by their hyperbolic counterparts. With $k=-1$, the ODE becomes $\dot{a}^2=C/a+1$, and the right-hand side is always positive --- there is no turnaround.
+
+\medskip\noindent\emph{Step 1 --- Substitution.} Set
+\begin{equation}\label{eq:open_sub}
+    a = \frac{C}{2}(\cosh\eta - 1)\,,
+\end{equation}
+so that $a=0$ at $\eta=0$ and $a$ increases monotonically. Differentiating:
+\begin{equation}
+    da = \frac{C}{2}\sinh\eta\;d\eta\,.
+\end{equation}
+
+\medskip\noindent\emph{Step 2 --- Simplify $\sqrt{C/a+1}$.} Substituting Eq.~\eqref{eq:open_sub}:
+\begin{equation}
+    \frac{C}{a}+1 = \frac{2}{\cosh\eta-1}+1 = \frac{2+(\cosh\eta-1)}{\cosh\eta-1} = \frac{1+\cosh\eta}{\cosh\eta-1}\,.
+\end{equation}
+Using the hyperbolic half-angle identities $1+\cosh\eta = 2\cosh^2(\eta/2)$ and $\cosh\eta-1=2\sinh^2(\eta/2)$:
+\begin{equation}
+    \sqrt{\frac{C}{a}+1} = \frac{\cosh(\eta/2)}{\sinh(\eta/2)}\,.
+\end{equation}
+
+\medskip\noindent\emph{Step 3 --- Compute $dt$.}
+\begin{align}
+    dt &= \frac{da}{\sqrt{C/a+1}}
+    = \frac{\frac{C}{2}\sinh\eta}{\dfrac{\cosh(\eta/2)}{\sinh(\eta/2)}}\;d\eta
+    = \frac{C}{2}\sinh\eta\;\frac{\sinh(\eta/2)}{\cosh(\eta/2)}\;d\eta\,.
+\end{align}
+Using $\sinh\eta = 2\sinh(\eta/2)\cosh(\eta/2)$:
+\begin{align}
+    dt &= \frac{C}{2}\cdot 2\sinh(\eta/2)\cosh(\eta/2)\cdot\frac{\sinh(\eta/2)}{\cosh(\eta/2)}\;d\eta
+    = C\sinh^2(\eta/2)\;d\eta\,.
+\end{align}
+Since $2\sinh^2(\eta/2) = \cosh\eta-1$:
+\begin{equation}
+    dt = \frac{C}{2}(\cosh\eta-1)\;d\eta\,.
+\end{equation}
+
+\medskip\noindent\emph{Step 4 --- Integrate.}
+\begin{equation}
+    t = \frac{C}{2}\int_0^{\eta}(\cosh\eta'-1)\;d\eta' = \frac{C}{2}\bigl[\sinh\eta'-\eta'\bigr]_0^{\eta} = \frac{C}{2}(\sinh\eta-\eta)\,.
+\end{equation}
+
+\medskip\noindent\emph{Result.} Defining $a_0\equiv C = 8\pi G\rho_{m,0}/3$ for the open case:
+\begin{equation}
+\boxed{
+    a = \frac{a_0}{2}(\cosh\eta-1)\,,\qquad
+    t = \frac{a_0}{2}(\sinh\eta-\eta)\,.}
+    \label{eq:hyperbolic}
+\end{equation}
+
+\medskip\noindent\emph{Check the limits:}
+\begin{itemize}
+    \item $\eta=0$: $a=0$, $t=0$ --- Big Bang.
+    \item $\eta\to\infty$: $\cosh\eta\approx\sinh\eta\approx\frac{1}{2}e^\eta$, so $a\approx\frac{C}{4}e^\eta$ and $t\approx\frac{C}{4}e^\eta$. Thus $a\propto t$ --- the universe coasts at constant velocity, as predicted by the qualitative analysis.
+\end{itemize}
+
+
+\subsection{Radiation-Dominated Universe}
+
+For matter, the energy in a comoving volume is constant: mass is conserved. For radiation, something different happens. Consider a box of photons expanding with the universe.
+
+There are two effects:
+
+\medskip\noindent\textbf{Effect 1: Dilution.} Just like matter, the number density of photons decreases as the volume grows. If we have $N$ photons in a comoving volume $V\propto a^3$, the number density goes as $n\propto a^{-3}$.
+
+\medskip\noindent\textbf{Effect 2: Redshift.} Unlike massive particles, each photon also loses energy as the universe expands. A photon's wavelength stretches with the scale factor:
+\begin{equation}
+    \lambda \propto a\,.
+\end{equation}
+Since the energy of a photon is $E=hc/\lambda$, each photon's energy decreases as
+\begin{equation}
+    E_\gamma \propto \frac{1}{a}\,.
+\end{equation}
+This is the cosmological redshift. It is not a Doppler effect --- it is the stretching of space itself stretching the wavelength of the photon.
+
+\medskip\noindent\textbf{Combined effect:} The radiation energy density is (number density) $\times$ (energy per photon):
+\begin{equation}
+    \rho_r \propto n\cdot E_\gamma \propto a^{-3}\cdot a^{-1} = a^{-4}\,.
+\end{equation}
+So:
+\begin{equation}
+\boxed{\rho_r(t) = \frac{\rho_{r,0}}{a^4(t)}\,.}
+\end{equation}
+Radiation dilutes faster than matter by one extra power of $a$, due to the redshift.
+
+
+With $k=0$ and radiation only:
+\begin{equation}
+    H^2 = \frac{8\pi G}{3}\,\frac{\rho_{r,0}}{a^4}\,.
+\end{equation}
+Taking the square root:
+\begin{equation}
+    \dot{a} = B\,a^{-1}\,,
+\end{equation}
+where $B\equiv\sqrt{8\pi G\rho_{r,0}/3}$. Separating variables:
+\begin{equation}
+    a\,da = B\,dt\,.
+\end{equation}
+Integrating:
+\begin{equation}
+    \frac{1}{2}\,a^2 = Bt\,.
+\end{equation}
+Solving for $a$:
+\begin{equation}
+\boxed{a(t) = (2Bt)^{1/2} \propto t^{1/2}\,.}
+\end{equation}
+
+\subsection*{Properties of the radiation-dominated solution}
+
+The Hubble parameter is
+\begin{equation}
+    H(t) = \frac{\dot{a}}{a} = \frac{1}{2t}\,,
+\end{equation}
+so the age of a radiation-dominated universe would be
+\begin{equation}
+    t_0 = \frac{1}{2H_0}\,,
+\end{equation}
+even younger than the matter-dominated case ($t_0=2/(3H_0)$). The expansion decelerates faster because radiation has a larger effective gravitational mass ($\rho+3p=2\rho$ for radiation, versus $\rho$ for matter).
+
+The deceleration parameter is
+\begin{equation}
+    q = 1\,,
+\end{equation}
+compared to $q=1/2$ for matter. The stronger deceleration reflects the extra pressure contribution to gravity.
+
+
+\subsection{Comparing Matter and Radiation}
+
+\subsection*{Which dominates when?}
+
+Since $\rho_m\propto a^{-3}$ and $\rho_r\propto a^{-4}$, their ratio is
+\begin{equation}
+    \frac{\rho_r}{\rho_m} = \frac{\rho_{r,0}}{\rho_{m,0}}\,\frac{1}{a}\,.
+\end{equation}
+At early times ($a\ll 1$), radiation dominates. At late times ($a\gg a_{\rm eq}$), matter dominates. The crossover occurs at matter--radiation equality:
+\begin{equation}
+    a_{\rm eq} = \frac{\rho_{r,0}}{\rho_{m,0}}\,.
+\end{equation}
+Using observed values, $a_{\rm eq}\approx 1/3400$, corresponding to a redshift $z_{\rm eq}\approx 3400$ and a temperature $T_{\rm eq}\approx 9500$ K. This is shortly before the epoch of recombination ($z\approx 1100$).
+
+\subsection*{The thermal history in brief}
+
+The temperature of the radiation bath scales as
+\begin{equation}
+    T \propto \frac{1}{a}\,,
+\end{equation}
+because the typical photon energy $E\propto 1/a$, and for a thermal distribution $E\sim k_B T$. This means:
+\begin{itemize}
+    \item Early universe ($a\ll a_{\rm eq}$): radiation-dominated, $a\propto t^{1/2}$, $T\propto t^{-1/2}$.
+    \item After equality ($a\gg a_{\rm eq}$): matter-dominated, $a\propto t^{2/3}$, $T\propto t^{-2/3}$.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{thermal_history_light}
+    \caption{Thermal history of the Universe in the $\Lambda$CDM concordance model. The photon temperature $T_\gamma \propto a^{-1}$ (solid orange) and the neutrino temperature $T_\nu = (4/11)^{1/3}\,T_\gamma$ (dashed) are shown as a function of scale factor. Key events are labelled: neutrino decoupling, Big Bang nucleosynthesis (BBN), $e^+e^-$ annihilation, recombination/decoupling, matter--radiation equality, reionisation, and the present day. Shaded bands indicate the radiation-dominated (red), matter-dominated (blue), and $\Lambda$-dominated (purple) epochs.}
+    \label{fig:thermal_history}
+\end{figure}
+
+\subsection*{Summary of single-component flat universes}
+
+The general pattern is worth seeing together. For a single component with equation of state $p=w\rho$, the continuity equation gives $\rho\propto a^{-3(1+w)}$, and the Friedmann equation gives:
+\begin{equation}
+    a(t) \propto t^{2/[3(1+w)]}\,,\qquad H = \frac{2}{3(1+w)}\,\frac{1}{t}\,,\qquad q = \frac{1+3w}{2}\,.
+\end{equation}
+Specific cases:
+
+\medskip
+\begin{center}
+\begin{tabular}{lcccccc}
+\hline\hline
+Component & $w$ & $\rho\propto$ & $a(t)\propto$ & $H(t)$ & $q$ & Age \\
+\hline
+Matter    & $0$    & $a^{-3}$ & $t^{2/3}$ & $\dfrac{2}{3t}$ & $\dfrac{1}{2}$ & $\dfrac{2}{3H_0}$ \\[10pt]
+Radiation & $1/3$  & $a^{-4}$ & $t^{1/2}$ & $\dfrac{1}{2t}$ & $1$ & $\dfrac{1}{2H_0}$ \\[10pt]
+Curvature$^*$ & $-1/3$ & $a^{-2}$ & $t^{1}$ & $\dfrac{1}{t}$ & $0$ & $\dfrac{1}{H_0}$ \\[10pt]
+$\Lambda$ & $-1$ & $a^{0}$ & $e^{Ht}$ & const & $-1$ & $\infty$ \\[4pt]
+\hline\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\noindent$^*$The ``curvature'' row treats the $k/a^2$ term as an effective fluid with $w=-1/3$. This is the empty, coasting Milne universe.
+
+The cosmological constant case ($w=-1$) is qualitatively different: $\rho_\Lambda=\text{const}$, the expansion is exponential, and the universe accelerates ($q<0$), as derived in the previous section.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{rho_vs_a}
+    \caption{Energy density (in units of today's critical density $\rho_{c,0}$) as a function of scale factor for radiation ($\rho_r \propto a^{-4}$), matter ($\rho_m \propto a^{-3}$), and the cosmological constant ($\rho_\Lambda = \text{const}$). Vertical dashed lines mark the matter--radiation equality ($a_{\rm eq} \approx 3 \times 10^{-4}$) and the matter--$\Lambda$ equality ($a \approx 0.75$). The labels RD, MD, and $\Lambda$D indicate the radiation-, matter-, and $\Lambda$-dominated epochs.}
+    \label{fig:rho_vs_a}
+\end{figure}
+
+
+\subsection{A General Formula: the Friedmann Integral}
+
+For a flat universe containing both matter and radiation (and potentially a cosmological constant), the Friedmann equation is
+\begin{equation}
+    H^2 = H_0^2\!\left[\frac{\Omega_{r,0}}{a^4} + \frac{\Omega_{m,0}}{a^3} + \Omega_{\Lambda,0}\right],
+\end{equation}
+where $\Omega_{r,0}+\Omega_{m,0}+\Omega_{\Lambda,0}=1$ for a flat universe. The age of the universe can be written as the integral
+\begin{equation}
+    t_0 = \frac{1}{H_0}\int_0^1 \frac{da}{\sqrt{\Omega_{r,0}\,a^{-2} + \Omega_{m,0}\,a^{-1} + \Omega_{\Lambda,0}\,a^2}}\,.
+\end{equation}
+This integral generally requires numerical evaluation, but reduces to the analytic solutions above in the single-component limits. Using the observed values $\Omega_{m,0}\approx 0.3$, $\Omega_{\Lambda,0}\approx 0.7$, and $\Omega_{r,0}\approx 10^{-4}$, one obtains $t_0\approx 13.8$ Gyr --- the correct age of the universe. The cosmological constant contributes significantly to increasing the age compared to the matter-only estimate of $\sim 9$ Gyr.
+
